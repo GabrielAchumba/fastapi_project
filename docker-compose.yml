@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+
+  fastapi:
+    build: .
+    container_name: fastapi_project
+    ports:
+      - "8000:8000"
+    environment:
+      MONGO_URI: "mongodb://mongodb:27017"
+      MONGO_DB: "fastapi_db"
+    depends_on:
+      - mongodb
